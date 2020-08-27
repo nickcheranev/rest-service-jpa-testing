@@ -1,12 +1,10 @@
 package com.example.restservicejpa.service;
 
 import com.example.restservicejpa.domain.User;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
@@ -17,7 +15,6 @@ import static org.hamcrest.Matchers.*;
  * @author Cheranev N.
  * created on 27.08.2020.
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceImplTest {
 
@@ -69,13 +66,12 @@ public class UserServiceImplTest {
         assertThat(findUser, notNullValue());
         assertThat(findUser.getName(), equalTo(UPDATE_TEST_NAME));
         assertThat(findUser.getEmail(), equalTo(UPDATE_TEST_EMAIL));
-
     }
 
-    @Test(expected = ResourceNotFoundException.class)
+    @Test
     public void deleteById() {
         User deleteUser = userService.create(new User(TEST_NAME, TEST_EMAIL));
         userService.deleteById(deleteUser.getId());
-        userService.findById(deleteUser.getId());
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> userService.findById(deleteUser.getId()));
     }
 }
