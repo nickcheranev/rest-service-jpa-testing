@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-20080827.yaml
+  - changeSet:
+      id: 1
+      author: ncheranev
+      changes:
+        - createSequence:
+            sequenceName: users_seq
+            startValue:  100
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+  - changeSet:
+      id: 2
+      author: ncheranev
+      comment: "Create admin user"
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: name
+                  value: "admin"
+              - column:
+                  name: email
+                  value: "admin@server.com"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: name
+                  value: "guest"
+              - column:
+                  name: email
+                  value: "guest@server.com"
+      rollback:
+        - delete:
+            tableName: users
+            where: name in ('admin', 'guest')

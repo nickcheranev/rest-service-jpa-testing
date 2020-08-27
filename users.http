@@ -1,0 +1,29 @@
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "name" :  "name2"
+}
+
+###
+PUT http://localhost:8080/users/2
+Content-Type: application/json
+
+{
+  "name" :  "guest1"
+}
+
+###
+DELETE http://localhost:8080/users/1
+
+###
+GET http://localhost:8080/users
+Accept: application/json
+
+###
+GET http://localhost:8080/users/100
+Accept: application/json
+
+###
+GET http://localhost:8080/users/findByName?name=guest
+Accept: application/json
