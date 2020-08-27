@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import static org.hamcrest.Matchers.*;
  * created on 27.08.2020.
  */
 @SpringBootTest
+@Transactional
 public class UserServiceImplTest {
 
     private static final String TEST_NAME = "testname";
