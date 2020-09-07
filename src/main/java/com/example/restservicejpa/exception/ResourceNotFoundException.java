@@ -1,4 +1,4 @@
-package com.example.restservicejpa.service;
+package com.example.restservicejpa.exception;
 
 /**
  * @author Cheranev N.

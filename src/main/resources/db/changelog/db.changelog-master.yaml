@@ -6,7 +6,7 @@ databaseChangeLog:
       changes:
         - createSequence:
             sequenceName: users_seq
-            startValue:  100
+            startValue:  3
         - createTable:
             tableName: users
             columns:

@@ -21,9 +21,9 @@ GET http://localhost:8080/users
 Accept: application/json
 
 ###
-GET http://localhost:8080/users/100
+GET http://localhost:8080/users/2
 Accept: application/json
 
 ###
-GET http://localhost:8080/users/findByName?name=guest
+GET http://localhost:8080/users/findByName?name=guest1
 Accept: application/json

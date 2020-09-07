@@ -1,5 +1,6 @@
 package com.example.restservicejpa.service;
 
+import com.example.restservicejpa.exception.ResourceNotFoundException;
 import com.example.restservicejpa.domain.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -30,19 +31,19 @@ public class UserServiceImplTest {
     private UserService userService;
 
     @Test
-    public void contextTest() {
+    void contextTest() {
         assertThat(userService, notNullValue());
     }
 
     @Test
-    public void findAll() {
+    void findAll() {
         List<User> users = userService.findAll();
         assertThat(users, not(empty()));
     }
 
     @Test
-    public void createAndFindById() {
-        User newUser = userService.create(new User(TEST_NAME, TEST_EMAIL));
+    void createAndFindById() {
+        User newUser = userService.create(User.builder().name(TEST_NAME).email(TEST_EMAIL).build());
         User findUser = userService.findById(newUser.getId());
         assertThat(findUser, notNullValue());
         assertThat(findUser.getName(), equalTo(TEST_NAME));
@@ -50,14 +51,14 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void findByName() {
+    void findByName() {
         User findUser = userService.findByName(GUEST_NAME);
         assertThat(findUser, notNullValue());
     }
 
     @Test
-    public void update() {
-        User newUser = userService.create(new User(TEST_NAME, null));
+    void update() {
+        User newUser = userService.create(User.builder().name(TEST_NAME).build());
         User findUser = userService.findById(newUser.getId());
         assertThat(findUser, notNullValue());
         assertThat(findUser.getEmail(), nullValue());
@@ -71,8 +72,8 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void deleteById() {
-        User deleteUser = userService.create(new User(TEST_NAME, TEST_EMAIL));
+    void deleteById() {
+        User deleteUser = userService.create(User.builder().name(TEST_NAME).email(TEST_EMAIL).build());
         userService.deleteById(deleteUser.getId());
         Assertions.assertThrows(ResourceNotFoundException.class, () -> userService.findById(deleteUser.getId()));
     }

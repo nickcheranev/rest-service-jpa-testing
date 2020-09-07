@@ -1,9 +1,9 @@
 package com.example.restservicejpa.web;
 
 import com.example.restservicejpa.domain.User;
-import com.example.restservicejpa.service.ResourceNotFoundException;
+import com.example.restservicejpa.exception.ResourceNotFoundException;
 import com.example.restservicejpa.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,17 +15,14 @@ import java.util.List;
  * created on 20.08.2020.
  */
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<User> findAll() {
         return userService.findAll();
     }

@@ -1,8 +1,9 @@
 package com.example.restservicejpa.service;
 
 import com.example.restservicejpa.domain.User;
+import com.example.restservicejpa.exception.ResourceNotFoundException;
 import com.example.restservicejpa.jpa.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,14 +14,10 @@ import java.util.Optional;
  * created on 20.08.2020.
  */
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public List<User> findAll() {
